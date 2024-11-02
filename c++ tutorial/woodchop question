@@ -1,0 +1,52 @@
+// WOOD CHOP QUESTION
+
+#include <iostream>
+using namespace std;
+bool canGetWood(int arr[],int n,int mid,int req_wood){
+    int wood=0;
+    int val=0;
+    for(int i=0;i<n;i++){
+        if(arr[i]<mid){  
+            continue;
+        }
+        val = arr[i]-mid; // tree height - mid
+        wood = wood + val;
+    }
+    if(wood<req_wood){
+        return false;
+    }
+    else{
+       return true;
+    }
+}
+int maxarr(int arr[],int n){
+	int mx = INT32_MIN;
+	for(int i=0;i<n;i++){
+		mx = max(arr[i],mx);
+	}
+	return mx;
+}
+int setHeight(int arr[],int n,int req_wood){
+    int s =0;
+    int e = maxarr(arr,n);
+    int mid = s + (e-s)/2;
+    int ans=0;
+    while(s<=e){
+        if (canGetWood(arr,n,mid,req_wood)){
+            ans = mid
+            s=mid+1; 
+        }
+        else{
+            e=mid-1; // setting a lower height to get more wood
+        }
+        mid = s +(e-s)/2;
+    }
+    return ans; )
+};
+
+/* example 
+int main(){
+    int arr[4]={20,15,10,17};
+    cout<<setHeight(arr,4,7);
+return 0;
+}*/
